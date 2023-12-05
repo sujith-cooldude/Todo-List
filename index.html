@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Tutorials</title>
+    <style>
+        .container {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .input {
+            border: 2px solid black;
+        }
+
+        .task-list {
+            margin: 15px;
+        }
+
+        li{
+            cursor: pointer;
+        }
+
+        .strike {
+            text-decoration: line-through;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Intel Team members</h2>
+        <form onsubmit="return false"><input id="task-input" class="input" type="text" autofocus>
+            <span>
+                <button type="submit" id="add-task">Add member</button>
+            </span>
+        </form>
+        <div class="task-list">
+            <ol></ol>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#add-task").click(function () {
+                let task = $("#task-input").val();
+                $("ol").append(`<li>${capitilizeString(task)}</li>`);
+                $("#task-input").val("");
+            });
+
+            // Use event delegation to handle click events on dynamically added li elements
+            $(".task-list").on("click", "li", function () {
+                $(this).toggleClass("strike");
+            });
+        });
+        function capitilizeString(str){
+            return str.charAt(0).toUpperCase() + str.slice(1)
+        }
+    </script>
+
+</body>
+
+</html>
